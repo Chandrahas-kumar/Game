@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe: Ninja Mode</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Home Screen -->
+    <div id="homeScreen" class="screen active">
+        <div class="container">
+            <h1 class="title">Tic Tac Toe</h1>
+            <p class="subtitle">Classic & Ninja Mode 🥷</p>
+            
+            <!-- Game Mode Toggle -->
+            <div class="mode-toggle">
+                <button class="mode-btn active" data-mode="normal">Normal Mode</button>
+                <button class="mode-btn" data-mode="ninja">Ninja Mode 🥷</button>
+            </div>
+            
+            <!-- Play Options -->
+            <div class="play-options">
+                <button class="play-btn" id="playFriendBtn">
+                    <span class="icon">👥</span>
+                    Play with Friend
+                </button>
+                <button class="play-btn" id="playBotBtn">
+                    <span class="icon">🤖</span>
+                    Play with Bot
+                </button>
+            </div>
+            
+            <!-- Settings Button -->
+            <button class="settings-btn" id="settingsBtn">⚙️ Settings</button>
+        </div>
+    </div>
+
+    <!-- Player Setup Screen -->
+    <div id="setupScreen" class="screen">
+        <div class="container">
+            <h2 id="setupTitle">Player Setup</h2>
+            
+            <!-- Friend Mode Setup -->
+            <div id="friendSetup" class="setup-form">
+                <div class="input-group">
+                    <label for="player1Name">Player 1 Name</label>
+                    <input type="text" id="player1Name" placeholder="Enter Player 1 name" maxlength="20">
+                </div>
+                <div class="input-group">
+                    <label for="player2Name">Player 2 Name</label>
+                    <input type="text" id="player2Name" placeholder="Enter Player 2 name" maxlength="20">
+                </div>
+                <div class="symbol-selection">
+                    <label>Choose Symbol:</label>
+                    <div class="symbol-options">
+                        <button class="symbol-btn" data-symbol="X">X</button>
+                        <button class="symbol-btn active" data-symbol="O">O</button>
+                    </div>
+                    <p class="hint">X always goes first</p>
+                </div>
+            </div>
+            
+            <!-- Bot Mode Setup -->
+            <div id="botSetup" class="setup-form" style="display: none;">
+                <div class="input-group">
+                    <label for="playerName">Your Name</label>
+                    <input type="text" id="playerName" placeholder="Enter your name" maxlength="20">
+                </div>
+                <div class="input-group">
+                    <label for="botDifficulty">Bot Difficulty</label>
+                    <select id="botDifficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div class="symbol-selection">
+                    <label>Choose Symbol:</label>
+                    <div class="symbol-options">
+                        <button class="symbol-btn active" data-symbol="X">X</button>
+                        <button class="symbol-btn" data-symbol="O">O</button>
+                    </div>
+                    <p class="hint">X always goes first</p>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-secondary" id="backBtn">← Back</button>
+                <button class="btn btn-primary" id="startGameBtn">Start Game</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <div class="container">
+            <!-- Game Header -->
+            <div class="game-header">
+                <button class="back-to-home-btn" id="homeBtn">🏠</button>
+                <div class="mode-indicator">
+                    <span id="currentModeDisplay">Normal Mode</span>
+                </div>
+            </div>
+            
+            <!-- Score Display -->
+            <div class="score-board">
+                <div class="score-item" id="playerXScore">
+                    <div class="player-info">
+                        <span class="player-name" id="playerXName">Player X</span>
+                        <span class="player-symbol">X</span>
+                    </div>
+                    <div class="score-value" id="scoreX">0</div>
+                </div>
+                <div class="score-item" id="playerOScore">
+                    <div class="player-info">
+                        <span class="player-name" id="playerOName">Player O</span>
+                        <span class="player-symbol">O</span>
+                    </div>
+                    <div class="score-value" id="scoreO">0</div>
+                </div>
+            </div>
+            
+            <!-- Current Turn Indicator -->
+            <div class="turn-indicator">
+                <span id="currentTurnText">X's Turn</span>
+            </div>
+            
+            <!-- Game Board -->
+            <div class="board-container">
+                <div class="board" id="gameBoard">
+                    <!-- Cells will be generated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Game Result Modal -->
+            <div id="resultModal" class="modal">
+                <div class="modal-content">
+                    <div id="resultMessage"></div>
+                    <div id="resultAnimation"></div>
+                    <div class="button-group">
+                        <button class="btn btn-secondary" id="resetScoreBtn">Reset Score</button>
+                        <button class="btn btn-primary" id="playAgainBtn">Play Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settingsScreen" class="screen">
+        <div class="container">
+            <h2>Settings</h2>
+            
+            <div class="settings-group">
+                <div class="setting-item">
+                    <label for="soundToggle">Sound Effects</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="soundToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="highContrastToggle">High Contrast Mode</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="highContrastToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" id="settingsBackBtn">← Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+
