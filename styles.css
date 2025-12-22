@@ -36,11 +36,15 @@ body {
     max-width: 600px;
     width: 100%;
     padding: 20px;
+    margin: 0 auto;
+    position: relative;
 }
 
 .screen {
     display: none;
     animation: fadeIn 0.3s ease-in;
+    min-height: 100vh;
+    position: relative;
 }
 
 .screen.active {
@@ -74,7 +78,20 @@ body {
     text-align: center;
     color: var(--text-secondary);
     font-size: 1.2rem;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
+}
+
+.author {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 40px 0 20px 0;
+    padding: 0;
+    opacity: 0.9;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
 }
 
 .mode-toggle {
@@ -247,6 +264,7 @@ body {
 .button-group {
     display: flex;
     gap: 10px;
+    margin-bottom: 0;
 }
 
 .btn {
@@ -375,7 +393,7 @@ body {
 .board-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .board {
