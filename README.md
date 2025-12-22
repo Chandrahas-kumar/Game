@@ -67,4 +67,3 @@ Works on all modern browsers:
 - Safari (latest)
 
 Enjoy playing! 🎉
-
