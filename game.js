@@ -30,15 +30,220 @@ const WINNING_COMBINATIONS = [
     [0, 4, 8], [2, 4, 6] // Diagonals
 ];
 
-// Quirky loss messages
-const QUIRKY_MESSAGES = [
+// Quirky win messages (50+)
+const QUIRKY_WIN_MESSAGES = [
+    "Victory achieved! 🎉",
+    "You're a champion! 🏆",
+    "Dominance displayed! 💪",
+    "Outstanding performance! ⭐",
+    "You crushed it! 🔥",
+    "Pure excellence! ✨",
+    "Masterful play! 🎯",
+    "You're unstoppable! 🚀",
+    "Brilliant strategy! 🧠",
+    "Flawless victory! 💎",
+    "You're on fire! 🔥",
+    "Perfect execution! ✅",
+    "You're a legend! 👑",
+    "Incredible skills! 🎨",
+    "You're amazing! 🌟",
+    "Outstanding move! 🎪",
+    "You're a pro! 🎮",
+    "Spectacular win! 🎊",
+    "You're the best! 🥇",
+    "Mind-blowing play! 🧨",
+    "You're incredible! 💫",
+    "Perfect timing! ⏰",
+    "You're a genius! 🎓",
+    "Epic victory! 🏅",
+    "You're unstoppable! ⚡",
+    "Brilliant mind! 🧠",
+    "You're a star! ⭐",
+    "Outstanding! 🌈",
+    "You're phenomenal! 🌠",
+    "Perfect strategy! 🎲",
+    "You're a master! 🎭",
+    "Incredible win! 🎪",
+    "You're awesome! 🌟",
+    "Flawless play! 💯",
+    "You're a hero! 🦸",
+    "Amazing skills! 🎯",
+    "You're the champ! 🏆",
+    "Brilliant victory! ✨",
+    "You're a wizard! 🧙",
+    "Perfect game! 🎮",
+    "You're a ninja! 🥷",
+    "Outstanding win! 🎉",
+    "You're a legend! 👑",
+    "Incredible play! 🎨",
+    "You're a star! ⭐",
+    "Epic skills! 🚀",
+    "You're amazing! 💎",
+    "Perfect execution! ✅",
+    "You're the best! 🥇",
+    "Brilliant mind! 🧠",
+    "You're unstoppable! 🔥"
+];
+
+// Quirky loss messages (50+)
+const QUIRKY_LOSS_MESSAGES = [
     "Oops... you played yourself 😆",
     "Strategic disaster detected 🚨",
     "That's one way to lose 😜",
     "Mission failed successfully! 🎯",
     "Well, that backfired! 💥",
     "Ninja mode strikes back! 🥷",
-    "You just ninja'd yourself! 😂"
+    "You just ninja'd yourself! 😂",
+    "Better luck next time! 🍀",
+    "That was... interesting 🤔",
+    "Oops, wrong move! 😅",
+    "Not your best moment! 😬",
+    "That didn't go as planned! 📋",
+    "You tried! 💪",
+    "Close, but no cigar! 🚬",
+    "Almost had it! 🎯",
+    "Nice try though! 👍",
+    "That's a bold strategy! 🎲",
+    "You'll get 'em next time! ⏭️",
+    "That's one for the books! 📚",
+    "Well, that happened! 🤷",
+    "You gave it your all! 💯",
+    "That's a learning moment! 📖",
+    "Not quite there yet! 🎯",
+    "You'll bounce back! 🏀",
+    "That's the spirit! 👻",
+    "You're getting closer! 📍",
+    "Keep practicing! 🏋️",
+    "That was a valiant effort! ⚔️",
+    "You're on the right track! 🛤️",
+    "That's how you learn! 🎓",
+    "You'll improve! 📈",
+    "That's okay, try again! 🔄",
+    "You're making progress! 📊",
+    "That's part of the game! 🎮",
+    "You're still awesome! 🌟",
+    "That's a good attempt! ✅",
+    "You'll do better next time! 🔮",
+    "That's how champions learn! 🏆",
+    "You're persistent! 🔁",
+    "That's admirable! 👏",
+    "You're resilient! 💪",
+    "That's the attitude! 😊",
+    "You're determined! 🎯",
+    "That's commendable! 🎖️",
+    "You're brave! 🦸",
+    "That's courageous! 🦁",
+    "You're strong! 💎",
+    "That's impressive effort! ⚡",
+    "You're a fighter! 🥊",
+    "That's the way to learn! 📚"
+];
+
+// Quirky confirmation messages (50+)
+const QUIRKY_CONFIRM_MESSAGES = [
+    "Are you sure? Your game will be lost! 😱",
+    "Wait! Your progress will disappear! 🚨",
+    "Hold up! This will end your current game! ⚠️",
+    "Are you absolutely sure? Game over! 🎮",
+    "Think twice! Your moves will vanish! 💨",
+    "Really? All that strategy gone? 🤔",
+    "Sure about this? Your game will reset! 🔄",
+    "Wait! Your epic game will be lost! ⚡",
+    "Are you certain? Progress will be wiped! 🧹",
+    "Hold on! Your masterpiece will disappear! 🎨",
+    "Think about it! Your game will end! 🛑",
+    "Are you sure? All moves will be lost! 📉",
+    "Wait a sec! Your strategy will vanish! 🎯",
+    "Really sure? Your game will reset! 🔁",
+    "Are you positive? Everything will be gone! 💭",
+    "Hold up! Your progress will disappear! 📊",
+    "Think carefully! Your game will end! 🎲",
+    "Are you certain? Your moves will be lost! 🎪",
+    "Wait! Your epic battle will end! ⚔️",
+    "Sure about this? Your game will reset! 🔄",
+    "Are you really sure? Progress will vanish! 🌟",
+    "Hold on! Your game will be lost! 🎭",
+    "Think twice! Your strategy will disappear! 🧠",
+    "Are you positive? Your game will end! 🎯",
+    "Wait! Your moves will be wiped! 🧹",
+    "Really? Your progress will be gone! 📉",
+    "Are you certain? Your game will reset! 🔁",
+    "Hold up! Your epic game will end! ⚡",
+    "Think about it! Your moves will vanish! 💨",
+    "Are you sure? Your game will be lost! 🎮",
+    "Wait a sec! Your strategy will disappear! 🎨",
+    "Really sure? Your game will reset! 🔄",
+    "Are you positive? Progress will be wiped! 📊",
+    "Hold on! Your game will end! 🛑",
+    "Think carefully! Your moves will be lost! 🎲",
+    "Are you certain? Your game will vanish! 💭",
+    "Wait! Your progress will disappear! 🌟",
+    "Sure about this? Your game will reset! 🔁",
+    "Are you really sure? Your moves will be gone! 🎪",
+    "Hold up! Your game will end! ⚔️",
+    "Think twice! Your strategy will vanish! 🧠",
+    "Are you positive? Your game will reset! 🎯",
+    "Wait! Your progress will disappear! 📉",
+    "Really? Your game will be lost! 🎮",
+    "Are you certain? Your moves will vanish! 💨",
+    "Hold on! Your game will end! ⚡",
+    "Think about it! Your progress will be wiped! 🧹",
+    "Are you sure? Your game will reset! 🔄",
+    "Wait a sec! Your moves will disappear! 🎨",
+    "Really sure? Your game will be lost! 🎯"
+];
+
+// Quirky bot win messages (50+)
+const QUIRKY_BOT_WIN_MESSAGES = [
+    "Bot owned you! 🤖",
+    "Bot just schooled you! 🎓",
+    "Bot crushed it! 💥",
+    "Bot is too good! 🏆",
+    "Bot outplayed you! 🎯",
+    "Bot dominated! 👑",
+    "Bot is unstoppable! 🚀",
+    "Bot is a legend! ⭐",
+    "Bot is on fire! 🔥",
+    "Bot is a master! 🥷",
+    "Bot is brilliant! 🧠",
+    "Bot is incredible! ✨",
+    "Bot is amazing! 🌟",
+    "Bot is phenomenal! 🌠",
+    "Bot is a genius! 🎓",
+    "Bot is a wizard! 🧙",
+    "Bot is a champion! 🏅",
+    "Bot is a pro! 🎮",
+    "Bot is spectacular! 🎊",
+    "Bot is the best! 🥇",
+    "Bot is mind-blowing! 🧨",
+    "Bot is perfect! 💯",
+    "Bot is a hero! 🦸",
+    "Bot is a star! ⭐",
+    "Bot is epic! 🚀",
+    "Bot is awesome! 💎",
+    "Bot is flawless! ✅",
+    "Bot is a ninja! 🥷",
+    "Bot is outstanding! 🎉",
+    "Bot is a legend! 👑",
+    "Bot is incredible! 🎨",
+    "Bot is amazing! 🌟",
+    "Bot is unstoppable! ⚡",
+    "Bot is brilliant! 🧠",
+    "Bot is a master! 🎭",
+    "Bot is a wizard! 🧙",
+    "Bot is a champion! 🏆",
+    "Bot is a pro! 🎮",
+    "Bot is spectacular! 🎪",
+    "Bot is the best! 🥇",
+    "Bot is mind-blowing! 🧨",
+    "Bot is perfect! 💯",
+    "Bot is a hero! 🦸",
+    "Bot is a star! ⭐",
+    "Bot is epic! 🚀",
+    "Bot is awesome! 💎",
+    "Bot is flawless! ✅",
+    "Bot is a ninja! 🥷",
+    "Bot is outstanding! 🎉"
 ];
 
 // DOM Elements
@@ -62,7 +267,11 @@ const elements = {
     homeBtn: document.getElementById('homeBtn'),
     soundToggle: document.getElementById('soundToggle'),
     highContrastToggle: document.getElementById('highContrastToggle'),
-    showAuthorToggle: document.getElementById('showAuthorToggle')
+    showAuthorToggle: document.getElementById('showAuthorToggle'),
+    confirmModal: document.getElementById('confirmModal'),
+    confirmMessage: document.getElementById('confirmMessage'),
+    confirmOkBtn: document.getElementById('confirmOkBtn'),
+    confirmCancelBtn: document.getElementById('confirmCancelBtn')
 };
 
 // Theme color presets
@@ -171,8 +380,27 @@ function setupEventListeners() {
 
     // Game screen
     document.getElementById('homeBtn').addEventListener('click', () => {
-        if (confirm('Are you sure you want to go back? Current game will be lost.')) {
+        showConfirmModal(() => {
             showHomeScreen();
+        });
+    });
+    
+    // Confirmation modal
+    elements.confirmOkBtn.addEventListener('click', () => {
+        if (elements.confirmModal.onConfirm) {
+            elements.confirmModal.onConfirm();
+        }
+        hideConfirmModal();
+    });
+    
+    elements.confirmCancelBtn.addEventListener('click', () => {
+        hideConfirmModal();
+    });
+    
+    // Close modal on background click
+    elements.confirmModal.addEventListener('click', (e) => {
+        if (e.target === elements.confirmModal) {
+            hideConfirmModal();
         }
     });
 
@@ -247,6 +475,20 @@ function updateAuthorVisibility() {
     authorElements.forEach(el => {
         el.style.display = gameState.showAuthor ? 'block' : 'none';
     });
+}
+
+// Show Confirmation Modal
+function showConfirmModal(onConfirm) {
+    const quirkyMessage = QUIRKY_CONFIRM_MESSAGES[Math.floor(Math.random() * QUIRKY_CONFIRM_MESSAGES.length)];
+    elements.confirmMessage.textContent = quirkyMessage;
+    elements.confirmModal.onConfirm = onConfirm;
+    elements.confirmModal.classList.add('active');
+}
+
+// Hide Confirmation Modal
+function hideConfirmModal() {
+    elements.confirmModal.classList.remove('active');
+    elements.confirmModal.onConfirm = null;
 }
 
 // Screen Navigation
@@ -455,7 +697,20 @@ function endGame() {
 // Show Win Result
 function showWinResult() {
     const winnerName = gameState.players[gameState.winner];
-    elements.resultMessage.innerHTML = `<span class="winner-name">${winnerName} Wins! 🎉</span>`;
+    const isBot = winnerName.toLowerCase().includes('bot');
+    
+    let winMessage;
+    if (isBot) {
+        // Bot won - use quirky bot win message
+        const quirkyMessage = QUIRKY_BOT_WIN_MESSAGES[Math.floor(Math.random() * QUIRKY_BOT_WIN_MESSAGES.length)];
+        winMessage = `<span class="winner-name">${quirkyMessage}</span>`;
+    } else {
+        // Player won - use quirky win message
+        const quirkyMessage = QUIRKY_WIN_MESSAGES[Math.floor(Math.random() * QUIRKY_WIN_MESSAGES.length)];
+        winMessage = `<span class="winner-name">${winnerName} - ${quirkyMessage}</span>`;
+    }
+    
+    elements.resultMessage.innerHTML = winMessage;
     elements.resultAnimation.innerHTML = '🎉';
     
     playSound('win');
@@ -466,7 +721,7 @@ function showWinResult() {
 // Show Loss Result
 function showLossResult() {
     const loserName = gameState.players[gameState.loser];
-    const quirkyMessage = QUIRKY_MESSAGES[Math.floor(Math.random() * QUIRKY_MESSAGES.length)];
+    const quirkyMessage = QUIRKY_LOSS_MESSAGES[Math.floor(Math.random() * QUIRKY_LOSS_MESSAGES.length)];
     
     elements.resultMessage.innerHTML = `<span class="loser-name">${loserName} Lost!</span>`;
     elements.resultAnimation.innerHTML = '<span class="laugh-emoji">😂</span>';
