@@ -280,6 +280,7 @@ const THEME_COLORS = {
         name: 'Indigo',
         primary: '#6366f1',
         secondary: '#8b5cf6',
+        buttonColor: '#4f46e5', // Darker for better contrast
         bgStart: '#0f172a',
         bgEnd: '#1a1f3a'
     },
@@ -287,6 +288,7 @@ const THEME_COLORS = {
         name: 'Pink',
         primary: '#ec4899',
         secondary: '#f472b6',
+        buttonColor: '#db2777', // Darker for better contrast
         bgStart: '#1a0f1a',
         bgEnd: '#2d1a2d'
     },
@@ -294,6 +296,7 @@ const THEME_COLORS = {
         name: 'Blue',
         primary: '#3b82f6',
         secondary: '#60a5fa',
+        buttonColor: '#2563eb', // Darker for better contrast
         bgStart: '#0f172a',
         bgEnd: '#1a2332'
     },
@@ -301,6 +304,7 @@ const THEME_COLORS = {
         name: 'Green',
         primary: '#10b981',
         secondary: '#34d399',
+        buttonColor: '#059669', // Darker for better contrast
         bgStart: '#0f1a17',
         bgEnd: '#1a2e28'
     },
@@ -308,6 +312,7 @@ const THEME_COLORS = {
         name: 'Purple',
         primary: '#8b5cf6',
         secondary: '#a78bfa',
+        buttonColor: '#7c3aed', // Darker for better contrast
         bgStart: '#1a0f1f',
         bgEnd: '#2a1f35'
     },
@@ -315,6 +320,7 @@ const THEME_COLORS = {
         name: 'Red',
         primary: '#ef4444',
         secondary: '#f87171',
+        buttonColor: '#dc2626', // Darker for better contrast
         bgStart: '#1a0f0f',
         bgEnd: '#2a1f1f'
     },
@@ -322,6 +328,7 @@ const THEME_COLORS = {
         name: 'Orange',
         primary: '#f59e0b',
         secondary: '#fbbf24',
+        buttonColor: '#d97706', // Darker for better contrast
         bgStart: '#1a150f',
         bgEnd: '#2a231a'
     },
@@ -329,6 +336,7 @@ const THEME_COLORS = {
         name: 'Teal',
         primary: '#14b8a6',
         secondary: '#5eead4',
+        buttonColor: '#0d9488', // Darker for better contrast
         bgStart: '#0f1a19',
         bgEnd: '#1a2e2c'
     }
@@ -465,6 +473,7 @@ function applyTheme(themeKey) {
     
     document.documentElement.style.setProperty('--primary-color', theme.primary);
     document.documentElement.style.setProperty('--secondary-color', theme.secondary);
+    document.documentElement.style.setProperty('--button-color', theme.buttonColor);
     document.documentElement.style.setProperty('--bg-gradient-start', theme.bgStart);
     document.documentElement.style.setProperty('--bg-gradient-end', theme.bgEnd);
 }
