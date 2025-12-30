@@ -18,7 +18,9 @@ const gameState = {
         O: 0
     },
     soundEnabled: true,
-    highContrast: false
+    highContrast: false,
+    themeColor: 'indigo', // Default theme
+    showAuthor: false // Hide author by default
 };
 
 // Winning combinations
@@ -59,7 +61,68 @@ const elements = {
     resetScoreBtn: document.getElementById('resetScoreBtn'),
     homeBtn: document.getElementById('homeBtn'),
     soundToggle: document.getElementById('soundToggle'),
-    highContrastToggle: document.getElementById('highContrastToggle')
+    highContrastToggle: document.getElementById('highContrastToggle'),
+    showAuthorToggle: document.getElementById('showAuthorToggle')
+};
+
+// Theme color presets
+const THEME_COLORS = {
+    indigo: {
+        name: 'Indigo',
+        primary: '#6366f1',
+        secondary: '#8b5cf6',
+        bgStart: '#0f172a',
+        bgEnd: '#1a1f3a'
+    },
+    pink: {
+        name: 'Pink',
+        primary: '#ec4899',
+        secondary: '#f472b6',
+        bgStart: '#1a0f1a',
+        bgEnd: '#2d1a2d'
+    },
+    blue: {
+        name: 'Blue',
+        primary: '#3b82f6',
+        secondary: '#60a5fa',
+        bgStart: '#0f172a',
+        bgEnd: '#1a2332'
+    },
+    green: {
+        name: 'Green',
+        primary: '#10b981',
+        secondary: '#34d399',
+        bgStart: '#0f1a17',
+        bgEnd: '#1a2e28'
+    },
+    purple: {
+        name: 'Purple',
+        primary: '#8b5cf6',
+        secondary: '#a78bfa',
+        bgStart: '#1a0f1f',
+        bgEnd: '#2a1f35'
+    },
+    red: {
+        name: 'Red',
+        primary: '#ef4444',
+        secondary: '#f87171',
+        bgStart: '#1a0f0f',
+        bgEnd: '#2a1f1f'
+    },
+    orange: {
+        name: 'Orange',
+        primary: '#f59e0b',
+        secondary: '#fbbf24',
+        bgStart: '#1a150f',
+        bgEnd: '#2a231a'
+    },
+    teal: {
+        name: 'Teal',
+        primary: '#14b8a6',
+        secondary: '#5eead4',
+        bgStart: '#0f1a19',
+        bgEnd: '#1a2e2c'
+    }
 };
 
 // Initialize
@@ -67,6 +130,8 @@ function init() {
     setupEventListeners();
     loadSettings();
     createBoard();
+    setupThemeSelector();
+    applyTheme(gameState.themeColor); // Apply theme after loading settings
 }
 
 // Setup Event Listeners
@@ -129,6 +194,59 @@ function setupEventListeners() {
         document.body.classList.toggle('high-contrast', e.target.checked);
         saveSettings();
     });
+    
+    elements.showAuthorToggle.addEventListener('change', (e) => {
+        gameState.showAuthor = e.target.checked;
+        updateAuthorVisibility();
+        saveSettings();
+    });
+}
+
+// Setup Theme Selector
+function setupThemeSelector() {
+    const colorOptionsContainer = document.getElementById('themeColorOptions');
+    colorOptionsContainer.innerHTML = '';
+    
+    Object.keys(THEME_COLORS).forEach(themeKey => {
+        const theme = THEME_COLORS[themeKey];
+        const colorOption = document.createElement('div');
+        colorOption.className = 'color-option';
+        if (themeKey === gameState.themeColor) {
+            colorOption.classList.add('active');
+        }
+        colorOption.style.backgroundColor = theme.primary;
+        colorOption.dataset.theme = themeKey;
+        colorOption.title = theme.name;
+        colorOption.addEventListener('click', () => selectTheme(themeKey));
+        colorOptionsContainer.appendChild(colorOption);
+    });
+}
+
+// Select Theme
+function selectTheme(themeKey) {
+    gameState.themeColor = themeKey;
+    applyTheme(themeKey);
+    setupThemeSelector(); // Refresh to update active state
+    saveSettings();
+}
+
+// Apply Theme
+function applyTheme(themeKey) {
+    const theme = THEME_COLORS[themeKey];
+    if (!theme) return;
+    
+    document.documentElement.style.setProperty('--primary-color', theme.primary);
+    document.documentElement.style.setProperty('--secondary-color', theme.secondary);
+    document.documentElement.style.setProperty('--bg-gradient-start', theme.bgStart);
+    document.documentElement.style.setProperty('--bg-gradient-end', theme.bgEnd);
+}
+
+// Update Author Visibility
+function updateAuthorVisibility() {
+    const authorElements = document.querySelectorAll('.author');
+    authorElements.forEach(el => {
+        el.style.display = gameState.showAuthor ? 'block' : 'none';
+    });
 }
 
 // Screen Navigation
@@ -163,6 +281,7 @@ function showSetupScreen() {
 
 function showSettingsScreen() {
     showScreen('settingsScreen');
+    setupThemeSelector(); // Refresh theme selector to show current selection
 }
 
 // Create Game Board
@@ -748,7 +867,9 @@ function playSound(type) {
 function saveSettings() {
     localStorage.setItem('ticTacToeSettings', JSON.stringify({
         soundEnabled: gameState.soundEnabled,
-        highContrast: gameState.highContrast
+        highContrast: gameState.highContrast,
+        themeColor: gameState.themeColor,
+        showAuthor: gameState.showAuthor
     }));
 }
 
@@ -758,10 +879,16 @@ function loadSettings() {
         const settings = JSON.parse(saved);
         gameState.soundEnabled = settings.soundEnabled !== false;
         gameState.highContrast = settings.highContrast === true;
+        gameState.showAuthor = settings.showAuthor === true;
+        if (settings.themeColor && THEME_COLORS[settings.themeColor]) {
+            gameState.themeColor = settings.themeColor;
+        }
         
         elements.soundToggle.checked = gameState.soundEnabled;
         elements.highContrastToggle.checked = gameState.highContrast;
+        elements.showAuthorToggle.checked = gameState.showAuthor;
         document.body.classList.toggle('high-contrast', gameState.highContrast);
+        updateAuthorVisibility();
     }
 }
 
